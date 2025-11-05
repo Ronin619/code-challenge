@@ -42,7 +42,7 @@ const isPalindrome = function(str) {
 };
 
 const largestPair = function(array) {
-   let result = 0;
+  let result = 0;
   
   for(let i = 0; i < array.length; i++) {
     if (array[i] * array[i+1] > result) {
@@ -53,9 +53,40 @@ const largestPair = function(array) {
 };
 
 const removeParenth = function(str) {
-  // your code here - don't forget to return a string!
+  const strArray = str.split("")
+  let firstHalf = [];
+  let lastHalf = [];
+ 
+  for(let i = 0; i < strArray.indexOf("("); i++) {
+    firstHalf.push(strArray[i]);
+  }
+ 
+  for(let j = (strArray.indexOf(")") + 1); j < strArray.length; j++) {
+    lastHalf.push(strArray[j]);
+  }
+ 
+  return firstHalf.concat(lastHalf).join("");
 };
 
 const scoreScrabble = function(str) {
-  // your code here - don't forget to return a number!
+  let total = 0;
+  const pointSystem = {
+    1: ["a", "e", "i", "o", "u", "l", "n", "r", "s", "t"],
+    2: ["d", "g"],
+    3: ["b", "c", "m", "p"],
+    4: ["f", "h", "v", "w", "y"],
+    5: ["k"],
+    8: ["j", "x"],
+    10: ["q", "z"],
+  };
+
+  for (const char of str) {
+    for (const key in pointSystem) {
+      if (pointSystem[key].includes(char)) {
+        total += Number(key);
+      }
+    }
+  }
+
+  return total;
 };
